@@ -3,18 +3,23 @@
 <div class="row">
   <p>Model:</p>
   <select id="modelSelect" [(ngModel)]="selectedModel">
-    <option [value]="null">Choose...</option>
-    <option *ngFor="let model of models" [value]="model">{{model.description}}</option>
+    <option [ngValue]="null">Choose model...</option>
+    <option *ngFor="let model of models" [ngValue]="model">{{model.description}}</option>
   </select>
 
-  <div *ngIf="availableColors()">
+  <ng-container *ngIf="availableColors.length > 0">
     <p>Color:</p>
     <select id="colorSelect" [(ngModel)]="selectedColor">
-      <option *ngFor="let color of availableColors()" [value]="color">{{color.description}}</option>
+      <option [ngValue]="null">Choose color...</option>
+      <option *ngFor="let color of availableColors" [ngValue]="color">{{color.description}}</option>
     </select>
-  </div>
+  </ng-container>
 </div>
 
-<div class="row">
-  <img [src]="carImageUrl()" alt="Car model">
+<div class="row" *ngIf="carImageUrl; else emptyImage">
+  <img [src]="carImageUrl" alt="Car model">
 </div>
+
+<ng-template #emptyImage>
+  <h3>Please select model and color to see the car.</h3>
+</ng-template>

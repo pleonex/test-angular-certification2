@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit, Signal, WritableSignal, computed, effect, signal } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TeslaCarsClient } from "../clients/tesla-cars.client";
 import { CommonModule } from "@angular/common";
 import { Subscription } from "rxjs";
 import { ICarColorModel, ICarModel } from "../clients/car-model";
 import { FormsModule } from "@angular/forms";
+import { CarBuilderService } from "./car-builder.service";
 
 @Component({
   selector: 'app-modelator-step1',
@@ -12,33 +13,60 @@ import { FormsModule } from "@angular/forms";
   imports: [CommonModule, FormsModule]
 })
 export class ModelatorStep1Component implements OnInit, OnDestroy {
-  private _clientSub?: Subscription;
+  private _subs: Subscription[] = [];
+  private _selectedModel: ICarModel | null = null;
+  private _selectedColor: ICarColorModel | null = null;
 
   models: ICarModel[] = [];
-  selectedModel: WritableSignal<ICarModel | null> = signal<ICarModel | null>(null);
+  availableColors: ICarColorModel[] = [];
+  carImageUrl: string = "";
 
-  availableColors: Signal<ICarColorModel[] | undefined> = computed(
-    () => this.selectedModel()?.colors);
-  selectedColor: Signal<ICarColorModel | null> = signal<ICarColorModel | null>(null);
+  get selectedModel(): ICarModel | null {
+    return this._selectedModel;
+  }
+  set selectedModel(value: ICarModel | null) {
+    if (value !== this._selectedModel) {
+      this._selectedModel = value;
+      this._builder.setCarModel(value);
+    }
+  }
 
-  carImageUrl: Signal<string> = computed(() =>
-    (this.selectedModel() && this.selectedColor())
-      ? this._client.getModelImageUrl(this.selectedModel()!.code, this.selectedColor()!.code)
-      : "");
+  get selectedColor(): ICarColorModel | null {
+    return this._selectedColor;
+  }
+  set selectedColor(value: ICarColorModel | null) {
+    if (value !== this._selectedColor) {
+      this._selectedColor = value;
+      this._builder.setCarColor(value);
+    }
+  }
 
-  constructor(private _client: TeslaCarsClient) {
-    effect(() => console.log(this.selectedModel()));
+  constructor(private _client: TeslaCarsClient, private _builder: CarBuilderService) {
   }
 
   ngOnInit(): void {
-    this._clientSub = this._client.getModels().subscribe(result => this.models = result);
+    this._subs.push(this._client.getModels().subscribe(result => this.models = result));
+    this._subs.push(this._builder.carModel$.subscribe(m => {
+      this.selectedModel = m;
+      this.availableColors = m?.colors ?? [];
+    }));
+    this._subs.push(this._builder.carColor$.subscribe(c => {
+      this.selectedColor = c;
+      this.carImageUrl = this.getCarImageUrl();
+    }));
   }
 
   ngOnDestroy(): void {
-    this._clientSub?.unsubscribe();
+    for (const sub of this._subs) {
+      sub.unsubscribe();
+    }
   }
 
-  modelSelected(model: ICarModel | null) : void {
-    this.selectedModel.set(model);
+  getCarImageUrl(): string {
+    if (this.selectedModel && this.selectedColor) {
+      return this._client.getModelImageUrl(this.selectedModel.code, this.selectedColor.code);
+    }
+
+    return "";
   }
 }
