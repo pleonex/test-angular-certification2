@@ -1,0 +1,20 @@
+<h2>Step1: Choose your model and color</h2>
+
+<div class="row">
+  <p>Model:</p>
+  <select id="modelSelect" [(ngModel)]="selectedModel">
+    <option [value]="null">Choose...</option>
+    <option *ngFor="let model of models" [value]="model">{{model.description}}</option>
+  </select>
+
+  <div *ngIf="availableColors()">
+    <p>Color:</p>
+    <select id="colorSelect" [(ngModel)]="selectedColor">
+      <option *ngFor="let color of availableColors()" [value]="color">{{color.description}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <img [src]="carImageUrl()" alt="Car model">
+</div>
