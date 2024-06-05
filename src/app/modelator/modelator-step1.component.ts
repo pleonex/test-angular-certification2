@@ -46,12 +46,10 @@ export class ModelatorStep1Component implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._subs.push(this._client.getModels().subscribe(result => this.models = result));
-    this._subs.push(this._builder.carModel$.subscribe(m => {
-      this.selectedModel = m;
-      this.availableColors = m?.colors ?? [];
-    }));
-    this._subs.push(this._builder.carColor$.subscribe(c => {
-      this.selectedColor = c;
+    this._subs.push(this._builder.car$.subscribe(c => {
+      this.selectedModel = c.model;
+      this.availableColors = c.model?.colors ?? [];
+      this.selectedColor = c.color;
       this.carImageUrl = this.getCarImageUrl();
     }));
   }
