@@ -52,10 +52,10 @@ const handlers = [
         yoke: false,
       }
     };
-    // @ts-ignore
+    // @ts-expect-error Code provided
     return HttpResponse.json(options[params.id.toUpperCase()]);
   }),
-  http.get('/models', ({ request, params, cookies }) => {
+  http.get('/models', () => {
     return HttpResponse.json([
       { code: "S",
         description: "Model S",
