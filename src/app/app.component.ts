@@ -1,13 +1,14 @@
 import {Component} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  templateUrl: "./app.component.html",
+  templateUrl: './app.component.html',
   standalone: true,
-  imports: [RouterOutlet]
+  imports: [RouterOutlet, RouterLink]
 })
 export class AppComponent {
-  name = 'Angular';
-
+  appName = 'Tesla configurator'
+  author = 'Benito Palacios Sanchez (@pleonex)';
+  repoUrl = 'https://github.com/pleonex/test-angular-certification2';
 }

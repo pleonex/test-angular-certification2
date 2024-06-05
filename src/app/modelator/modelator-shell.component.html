@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="button-group">
+    <button (click)="navigateToStep(1)" [class.primary]="currentStep === 1">Step 1</button>
+    <button (click)="navigateToStep(2)" [class.primary]="currentStep === 2">Step 2</button>
+    <button (click)="navigateToStep(3)" [class.primary]="currentStep === 3">Step 3</button>
+  </div>
+  <router-outlet></router-outlet>
+</div>
