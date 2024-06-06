@@ -38,10 +38,10 @@ jobs:
         run: "npm ci"
 
       - name: "Build"
-        run: "npm run build -- --configuration=production"
+        run: "npx ng build --configuration production --base-href /test-angular-certification2/"
 
       - name: "Lint"
-        run: "npm run lint"
+        run: "npx ng lint"
 
       # TODO: run tests
 
