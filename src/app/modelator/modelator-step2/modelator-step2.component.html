@@ -2,9 +2,30 @@
 
 <ng-container *ngIf="opts">
   <div class="row">
+    <p>Configuration:</p>
     <select id="configSelect" [(ngModel)]="selectedConfig">
       <option [ngValue]="null">Choose the configuration</option>
       <option *ngFor="let config of opts.configs" [ngValue]="config.id">{{config.description}}</option>
     </select>
+  </div>
+
+  <div class="row" *ngIf="configDetails">
+    <p>
+      Range: {{configDetails.range}} miles
+      - Max speed: {{configDetails.speed}}
+      - Cost: {{configDetails.price | currency : 'USD'}}</p>
+  </div>
+
+  <div class="row">
+    <label for="includeTow">Tow hitch?</label>
+    <input id="includeTow" type="checkbox" [disabled]="!opts.towHitch" [(ngModel)]="selectedTow">
+  </div>
+  <div class="row">
+    <label for="includeYoke">Yoke steering wheel?</label>
+    <input id="includeYoke" type="checkbox" [disabled]="!opts.yoke" [(ngModel)]="selectedYoke">
+  </div>
+
+  <div class="row">
+    <img [src]="carImageUrl" alt="Car model">
   </div>
 </ng-container>

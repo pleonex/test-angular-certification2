@@ -11,10 +11,11 @@ export class CarBuilderService {
 
   private _step2Validity = new BehaviorSubject<boolean>(false);
   private _step3Validity = new BehaviorSubject<boolean>(false);
-  private _clientCarSubject: BehaviorSubject<IClientCar>;
+  private _clientCarSubject: BehaviorSubject<Readonly<IClientCar>>;
 
   step2Validity$ = this._step2Validity.asObservable();
   step3Validity$ = this._step3Validity.asObservable();
+  clientCar: Readonly<IClientCar>;
   clientCar$: Observable<IClientCar>;
 
   constructor() {
@@ -29,6 +30,7 @@ export class CarBuilderService {
         yoke: false,
       } as IClientCar;
 
+    this.clientCar = this._clientCar;
     this._clientCarSubject = new BehaviorSubject<IClientCar>(this._clientCar);
     this.clientCar$ = this._clientCarSubject.asObservable();
     this.updateStepsValidity();
@@ -51,18 +53,20 @@ export class CarBuilderService {
   }
 
   setCarModel(modelCode: string | null): void {
-    if (modelCode == this._clientCar.modelCode) {
+    if (modelCode === this._clientCar.modelCode) {
       return;
     }
 
     this._clientCar.modelCode = modelCode;
     this._clientCar.colorCode = null;
     this._clientCar.configId = null;
+    this._clientCar.towHitch = false;
+    this._clientCar.yoke = false;
     this.saveAndNotify();
   }
 
   setCarColor(colorCode: string | null): void {
-    if (colorCode == this._clientCar.colorCode) {
+    if (colorCode === this._clientCar.colorCode) {
       return;
     }
 
@@ -71,11 +75,29 @@ export class CarBuilderService {
   }
 
   setCarConfig(configId: number | null): void {
-    if (configId == this._clientCar.configId) {
+    if (configId === this._clientCar.configId) {
       return;
     }
 
     this._clientCar.configId = configId;
+    this.saveAndNotify();
+  }
+
+  setOptionTow(value: boolean): void {
+    if (value === this._clientCar.towHitch) {
+      return;
+    }
+
+    this._clientCar.towHitch = value;
+    this.saveAndNotify();
+  }
+
+  setOptionYoke(value: boolean): void {
+    if (value === this._clientCar.yoke) {
+      return;
+    }
+
+    this._clientCar.yoke = value;
     this.saveAndNotify();
   }
 
