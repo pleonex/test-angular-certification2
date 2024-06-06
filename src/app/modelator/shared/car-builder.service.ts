@@ -101,7 +101,7 @@ export class CarBuilderService {
     this.saveAndNotify();
   }
 
-  private saveAndNotify() {
+  private saveAndNotify(): void {
     const carJson = JSON.stringify(this._clientCar);
     window.localStorage.setItem(this._storageKey, carJson);
 

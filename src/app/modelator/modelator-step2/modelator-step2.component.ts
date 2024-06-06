@@ -59,7 +59,6 @@ export class ModelatorStep2Component implements OnInit, OnDestroy {
       return;
     }
 
-    console.log(`Received step2 info: ${this._clientCar.configId}/${this._clientCar.towHitch}/${this._clientCar.yoke}`);
     this.carImageUrl = this._client.getModelImageUrl(this._clientCar.modelCode!, this._clientCar.colorCode!);
     this.selectedTow = this._clientCar.towHitch;
     this.selectedYoke = this._clientCar.yoke;

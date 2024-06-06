@@ -110,7 +110,14 @@ const handlers = [
   }),
 ];
 
-setupWorker(...handlers).start()
+// Update home page when deployed to GitHub Pages
+const homeUrl: string = process.env['NODE_ENV'] === 'development' ? '' : '/test-angular-certification2';
+
+setupWorker(...handlers).start({
+  serviceWorker: {
+    url: homeUrl + "/mockServiceWorker.js",
+  }
+})
   .then(() => bootstrapApplication(AppComponent, appConfig))
   .catch((err) => console.error(err));
 

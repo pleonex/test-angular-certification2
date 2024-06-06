@@ -59,7 +59,6 @@ export class ModelatorStep1Component implements OnInit, OnDestroy {
         // After receiving the list of models from the backend (one-time only)
         // we can subscribe to our car builder status as we will have the selects filled of options.
         this._subs.push(this._builder.clientCar$.subscribe(c => {
-          console.log(`Received step1 info ${c.modelCode}/${c.colorCode}`);
           this.selectedModel = c.modelCode;
 
           if (c.modelCode) {
