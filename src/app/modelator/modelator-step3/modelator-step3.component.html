@@ -1,0 +1,53 @@
+<h2>Step 3: Summary</h2>
+
+<h4>Your Tesla {{modelDetails?.description}}</h4>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <p>
+        <strong>{{configDetails?.description}}</strong><br>
+        Range: {{configDetails?.range}} miles - Max speed: {{configDetails?.speed}}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>{{configDetails?.price | currency : 'USD'}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <p><strong>{{colorDetails?.description}}</strong></p>
+    </div>
+    <div class="col-sm-3">
+      <p>{{colorDetails?.price | currency : 'USD'}}</p>
+    </div>
+  </div>
+  <div class="row" *ngIf="hasTow">
+    <div class="col-sm-8">
+      <p><strong>Tow hitch package</strong></p>
+    </div>
+    <div class="col-sm-3">
+      <p>{{optionsPrice | currency : 'USD'}}</p>
+    </div>
+  </div>
+  <div class="row" *ngIf="hasYoke">
+    <div class="col-sm-8">
+      <p><strong>Yoke steering wheel package</strong></p>
+    </div>
+    <div class="col-sm-3">
+      <p>{{optionsPrice | currency : 'USD'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-8">
+      <p><strong>TOTAL COST</strong></p>
+    </div>
+    <div class="col-sm-3">
+      <p>{{totalCost | currency : 'USD'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <img [src]="carImageUrl" alt="Car model">
+  </div>
+</div>

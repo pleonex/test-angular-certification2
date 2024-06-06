@@ -7,5 +7,5 @@ export interface ICarModelDetails {
 export interface ICarColorDetails {
   code: string;
   description: string;
-  private: number;
+  price: number;
 }

@@ -31,6 +31,11 @@ export class TeslaCarsClient {
       );
   }
 
+  getOptionsPrice(): number {
+    // missing from the API but I would expect to get it from there with the rest.
+    return 1000;
+  }
+
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
     console.log(err);

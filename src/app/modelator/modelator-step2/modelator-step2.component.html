@@ -16,11 +16,11 @@
       - Cost: {{configDetails.price | currency : 'USD'}}</p>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="opts.towHitch">
     <label for="includeTow">Tow hitch?</label>
     <input id="includeTow" type="checkbox" [disabled]="!opts.towHitch" [(ngModel)]="selectedTow">
   </div>
-  <div class="row">
+  <div class="row" *ngIf="opts.yoke">
     <label for="includeYoke">Yoke steering wheel?</label>
     <input id="includeYoke" type="checkbox" [disabled]="!opts.yoke" [(ngModel)]="selectedYoke">
   </div>
