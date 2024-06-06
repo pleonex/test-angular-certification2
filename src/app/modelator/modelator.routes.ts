@@ -1,8 +1,8 @@
 import { Routes } from "@angular/router";
-import { ModelatorStep1Component } from "./modelator-step1.component";
-import { ModelatorStep2Component } from "./modelator-step2.component";
-import { ModelatorStep3Component } from "./modelator-step3.component";
-import { getModelatorStepGuard } from "./modelator-step.guard";
+import { ModelatorStep1Component } from "./modelator-step1/modelator-step1.component";
+import { ModelatorStep2Component } from "./modelator-step2/modelator-step2.component";
+import { ModelatorStep3Component } from "./modelator-step3/modelator-step3.component";
+import { getModelatorStepGuard } from "./shared/modelator-step.guard";
 
 export const MODELATOR_ROUTES: Routes = [
   { path: "step1", component: ModelatorStep1Component },

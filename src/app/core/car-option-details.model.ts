@@ -1,10 +1,10 @@
-export interface ICarOption {
-  configs: ICarConfig[];
+export interface ICarOptionDetails {
+  configs: ICarConfigDetails[];
   towHitch: boolean;
   yoke: boolean;
 }
 
-export interface ICarConfig {
+export interface ICarConfigDetails {
   id: number;
   description: string;
   range: number;

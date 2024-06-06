@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { Subscription, filter, map } from "rxjs";
-import { CarBuilderService } from "./car-builder.service";
+import { CarBuilderService } from "../shared/car-builder.service";
 
 @Component({
   selector: 'app-modelator-shell',

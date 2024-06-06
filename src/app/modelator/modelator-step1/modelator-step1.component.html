@@ -4,14 +4,14 @@
   <p>Model:</p>
   <select id="modelSelect" [(ngModel)]="selectedModel">
     <option [ngValue]="null">Choose model...</option>
-    <option *ngFor="let model of models" [ngValue]="model">{{model.description}}</option>
+    <option *ngFor="let model of models" [ngValue]="model.code">{{model.description}}</option>
   </select>
 
   <ng-container *ngIf="availableColors.length > 0">
     <p>Color:</p>
     <select id="colorSelect" [(ngModel)]="selectedColor">
       <option [ngValue]="null">Choose color...</option>
-      <option *ngFor="let color of availableColors" [ngValue]="color">{{color.description}}</option>
+      <option *ngFor="let color of availableColors" [ngValue]="color.code">{{color.description}}</option>
     </select>
   </ng-container>
 </div>

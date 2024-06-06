@@ -1,10 +1,10 @@
-export interface ICarModel {
+export interface ICarModelDetails {
   code: string;
   description: string;
-  colors: ICarColorModel[];
+  colors: ICarColorDetails[];
 }
 
-export interface ICarColorModel {
+export interface ICarColorDetails {
   code: string;
   description: string;
   private: number;

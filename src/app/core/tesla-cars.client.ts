@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, catchError, throwError } from "rxjs";
-import { ICarModel } from "./car-model";
-import { ICarOption } from "./car-options";
+import { ICarModelDetails } from "./car-model-details.model";
+import { ICarOptionDetails } from "./car-option-details.model";
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,8 @@ export class TeslaCarsClient {
   constructor(private _http: HttpClient) {
   }
 
-  getModels(): Observable<ICarModel[]> {
-    return this._http.get<ICarModel[]>("/models")
+  getModels(): Observable<ICarModelDetails[]> {
+    return this._http.get<ICarModelDetails[]>("/models")
       .pipe(
         catchError(this.handleError),
       );
@@ -24,8 +24,8 @@ export class TeslaCarsClient {
     return `${this._imageApi}/${modelCode}/${colorCode}.jpg`;
   }
 
-  getConfigs(modelCode: string): Observable<ICarOption> {
-    return this._http.get<ICarOption>(`/options/${modelCode}`)
+  getConfigs(modelCode: string): Observable<ICarOptionDetails> {
+    return this._http.get<ICarOptionDetails>(`/options/${modelCode}`)
       .pipe(
         catchError(this.handleError),
       );

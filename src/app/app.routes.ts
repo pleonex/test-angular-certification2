@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Error404Component } from './error404.component';
-import { ModelatorShellComponent } from './modelator/modelator-shell.component';
+import { ModelatorShellComponent } from './modelator/modelator-shell/modelator-shell.component';
 
 export const routes: Routes = [
   {

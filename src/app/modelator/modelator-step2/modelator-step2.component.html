@@ -1,0 +1,10 @@
+<h2>Step 2: Select your configuration and options</h2>
+
+<ng-container *ngIf="opts">
+  <div class="row">
+    <select id="configSelect" [(ngModel)]="selectedConfig">
+      <option [ngValue]="null">Choose the configuration</option>
+      <option *ngFor="let config of opts.configs" [ngValue]="config.id">{{config.description}}</option>
+    </select>
+  </div>
+</ng-container>
